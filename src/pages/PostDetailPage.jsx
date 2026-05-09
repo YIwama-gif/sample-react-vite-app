@@ -14,7 +14,10 @@ export const PostDetailPage = () => {
   const { id } = useParams()
   const post = posts.find((p) => String(p.id) === id)
 
-  if (!post) return null
+  if (!post) {
+     return <p>記事が見つかりません</p>
+   }
+
 
   return (
     <article className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
