@@ -1,5 +1,7 @@
+import { Route, Routes } from 'react-router-dom'
 import { posts } from './data/posts'
 import { PostCard } from './components/PostCard'
+import { PostDetailPage } from './pages/PostDetailPage'
 
 function App() {
   return (
@@ -10,12 +12,24 @@ function App() {
         </div>
       </header>
       <main className="max-w-5xl mx-auto px-4 py-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">記事一覧</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {posts.map((post) => (
-            <PostCard key={post.id} post={post} />
-          ))}
-        </div>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                  記事一覧
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {posts.map((post) => (
+                    <PostCard key={post.id} post={post} />
+                  ))}
+                </div>
+              </>
+            }
+          />
+          <Route path="/posts/:id" element={<PostDetailPage />} />
+        </Routes>
       </main>
     </div>
   )

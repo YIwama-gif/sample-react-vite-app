@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const formatDate = (iso) => {
   const d = new Date(iso)
   if (Number.isNaN(d.getTime())) return ''
@@ -9,7 +11,10 @@ const formatDate = (iso) => {
 
 export const PostCard = ({ post }) => {
   return (
-    <article className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+    <Link
+      to={`/posts/${post.id}`}
+      className="block bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition"
+    >
       <img
         src={post.thumbnailUrl}
         alt={post.title}
@@ -33,6 +38,6 @@ export const PostCard = ({ post }) => {
           ))}
         </div>
       </div>
-    </article>
+    </Link>
   )
 }
