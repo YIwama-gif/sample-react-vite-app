@@ -3,6 +3,7 @@ import { PostCard } from '../components/PostCard'
 
 export const PostsPage = () => {
   const [posts, setPosts] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
   // APIでpostsを取得する処理をuseEffectで実行します。
   useEffect(() => {
@@ -12,10 +13,19 @@ export const PostsPage = () => {
       )
       const data = await res.json()
       setPosts(data.posts)
+      setIsLoading(false)
     }
 
     fetcher()
   }, [])
+
+  if (isLoading) {
+    return <p>読み込み中</p>
+  }
+
+  if (posts.length === 0) {
+    return <p>記事がありません</p>
+  }
 
   return (
     <>

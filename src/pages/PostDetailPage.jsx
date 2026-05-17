@@ -13,6 +13,7 @@ const formatDate = (iso) => {
 export const PostDetailPage = () => {
   const { id } = useParams()
   const [post, setPost] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const fetcher = async () => {
@@ -21,10 +22,15 @@ export const PostDetailPage = () => {
       )
       const data = await res.json()
       setPost(data.post)
+      setIsLoading(false)
     }
 
     fetcher()
   }, [id])
+
+  if (isLoading) {
+    return <p>読み込み中</p>
+  }
 
   if (!post) {
     return <p>記事が見つかりません</p>
